@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+        <util:map id="businessMap" key-type="java.lang.String" value-type="java.lang.String" >
+            <entry key='${business1}' value="${business.account1}" />
+            <entry key="${business2}" value="${business.account2}" />
+            <entry key="${business3}" value="${business.account3}" />
+        </util:map>
+
+        <!-- 本地环境配置文件 -->
+        <beans profile="local">
+            <context:property-placeholder location="classpath:config/local/config.properties, classpath:config/local/database.properties" />
+        </beans>
+
+        <!-- 生产环境配置文件 -->
+        <beans profile="production">
+            <context:property-placeholder location="classpath:config/production/config.properties, classpath:config/production/database.properties" />
+        </beans>
+
+        <!-- 开发环境配置文件 -->
+        <beans profile="development">
+            <context:property-placeholder location="classpath:config/dev/config.properties, classpath:config/dev/database.properties" />
+        </beans>
+
+</beans>
